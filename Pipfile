@@ -1,0 +1,29 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pydantic = "==0.30.1"
+
+[dev-packages]
+asynctest = "==0.12.1"
+pytest = "==5.2.1"
+pytest-cov = "==2.8.1"
+codecov = "==2.0.15"
+mypy = "==0.630"
+black = "==18.9b0"
+isort = {extras = ["pipfile"],version = "==4.3.15"}
+python-boilerplate = {editable = true,path = "."}
+lxml = "==4.4.1"
+
+[requires]
+python_version = "3.7"
+
+[scripts]
+test = "py.test -v --cov=myproj --cov-report term-missing -v"
+lint = "mypy ./ --ignore-missing-imports"
+fmt = "black --py36 -v --line-length 80 ."
+fmt-check = "black --py36 -v --line-length 80 --check ."
+isort-fmt = "isort --apply --recursive --line-width 80 --use-parentheses --no-inline-sort --multi-line 3 --trailing-comma ."
+isort-check = "isort --check-only --recursive --line-width 80 --use-parentheses --no-inline-sort --multi-line 3 --trailing-comma ."
