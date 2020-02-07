@@ -9,18 +9,19 @@ from setuptools import (  # Always prefer setuptools over distutils
 here = path.abspath(path.dirname(__file__))
 
 setup(
-    name="python-boilerplate",
+    name="django-mode",
     version="0.0.1",
-    description="Python Boilerplate Project",
+    description="Django Mode Analytics Whitelabel",
     long_description="",
-    url="https://github.com/daltonmatos/python-boilerplate",
-    # Author details
-    author="Dalton Matos",
-    author_email="daltonmatos@gmail.com",
+    url="https://github.com/jesuejunior/django-mode",
+    author="jesue Junior",
+    author_email="jesuesousa@gmail.com",
     license="MIT",
     classifiers=[
+        "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
     ],
     packages=find_packages(exclude=["contrib", "docs", "tests*"]),
     test_suite="tests",
