@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from typing import List
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = "22s8vc&aueokn&yo6-44qibwl3(w4v98k=n=hn66a_c_x=!^+*"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS: List[str] = []
 
 
 # Application definition
