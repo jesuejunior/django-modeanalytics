@@ -19,7 +19,13 @@ class ModeReportModel(models.Model):
     name = models.CharField(max_length=120, verbose_name="Report Name")
     run_token = models.CharField(max_length=16, verbose_name="Run Token")
     space = models.CharField(max_length=16, blank=True, null=True, verbose_name="Space")
-    params = JSONField(default=f, verbose_name="Query Parameters(JSON)", blank=True, null=True)
+    params = JSONField(
+        default=f,
+        verbose_name="Query Parameters(JSON)",
+        blank=True,
+        null=True,
+        help_text="Choices are Select([ ]), Multiselect([ [ ] ]), Text and Date(YYYY-MM-DD)",
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created At")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Updated At")
 
@@ -39,9 +45,6 @@ class ModeReportModel(models.Model):
         return f"https://app.mode.com/{org}/reports/{self.run_token}/embed?access_key={access_key}&{query}"
 
     def __sign_url(self, url: str, timestamp: int) -> str:
-        """
-            Generates https://app.mode.com/octan/reports/0d57a7jr4789/embed?access_key=1231794bgrb3&param_sales_region=North%20America&timestamp=1532446786,1532446786
-        """
         secret: str = settings.MODE_ACCESS_SECRET
 
         request_type: str = "GET"
@@ -55,7 +58,7 @@ class ModeReportModel(models.Model):
         signed_url: str = f"{url}&signature={signature}"
         return signed_url
 
-    def __configure_params(self, params: Dict[str, str]) -> None:
+    def __convert_params(self, params: Dict[str, str]) -> None:
         base_params: Dict[str, str] = {"max_age": self.params.get("max_age")}
         params.update(self.params)
         data: Dict[str, str] = {f"param_{k}": v for k, v in params.items() if k not in ["max_age", "timestamp"]}
@@ -63,10 +66,10 @@ class ModeReportModel(models.Model):
         self.params = data
 
     def get_report_url(self, params) -> str:
-
-        self.__configure_params(params)
+        """
+            Generates https://app.mode.com/octan/reports/0d57a7jr4789/embed?access_key=1231794bgrb3&param_sales_region=North%20America&timestamp=1532446786,1532446786
+        """
+        self.__convert_params(params)
         timestamp: int = int(time.time())
         url: str = self.__create_url(timestamp)
-        signed_url: str = self.__sign_url(url, timestamp)
-        print(self.params)
-        return signed_url
+        return self.__sign_url(url, timestamp)
