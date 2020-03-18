@@ -1,7 +1,9 @@
 import base64
+import copy
 import hashlib
 import hmac
 import time
+from typing import Dict
 from urllib.parse import urlencode
 
 from django.conf import settings
@@ -36,21 +38,35 @@ class ModeReportModel(models.Model):
         query: str = urlencode(sorted(self.params.items()), doseq=True, encoding="utf-8")
         return f"https://app.mode.com/{org}/reports/{self.run_token}/embed?access_key={access_key}&{query}"
 
-    def sign_url(self) -> str:
+    def __sign_url(self, url: str, timestamp: int) -> str:
         """
             Generates https://app.mode.com/octan/reports/0d57a7jr4789/embed?access_key=1231794bgrb3&param_sales_region=North%20America&timestamp=1532446786,1532446786
         """
         secret: str = settings.MODE_ACCESS_SECRET
-        timestamp: int = int(time.time())
-        url: str = self.__create_url(timestamp)
 
         request_type: str = "GET"
         content_type: str = ""  # FIXME: remove it
         content_body: str = ""  # FIXME: remove it
-        content_hash: str = hashlib.md5(content_body.encode()).digest()
+        content_hash: bytes = hashlib.md5(content_body.encode()).digest()
         content_digest: str = base64.encodestring(content_hash).strip().decode()
 
         request_string: str = ",".join([request_type, content_type, content_digest, url, str(timestamp)])
-        signature = hmac.new(secret.encode(), msg=request_string.encode(), digestmod=hashlib.sha256).hexdigest()
+        signature: str = hmac.new(secret.encode(), msg=request_string.encode(), digestmod=hashlib.sha256).hexdigest()
         signed_url: str = f"{url}&signature={signature}"
+        return signed_url
+
+    def __configure_params(self, params: Dict[str, str]) -> None:
+        base_params: Dict[str, str] = {"max_age": self.params.get("max_age")}
+        params.update(self.params)
+        data: Dict[str, str] = {f"param_{k}": v for k, v in params.items() if k not in ["max_age", "timestamp"]}
+        data.update(base_params)
+        self.params = data
+
+    def get_report_url(self, params) -> str:
+
+        self.__configure_params(params)
+        timestamp: int = int(time.time())
+        url: str = self.__create_url(timestamp)
+        signed_url: str = self.__sign_url(url, timestamp)
+        print(self.params)
         return signed_url
