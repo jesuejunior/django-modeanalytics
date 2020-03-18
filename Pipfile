@@ -15,6 +15,7 @@ mypy = "==0.630"
 black = "==18.9b0"
 isort = {extras = ["pipfile"],version = "==4.3.15"}
 lxml = "==4.4.1"
+twine = "*"
 
 [requires]
 python_version = "3"
