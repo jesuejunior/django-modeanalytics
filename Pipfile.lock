@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f14a2f5dec2495fa437153773823da15f9c10aa8687e75d538bbb6449ae8538b"
+            "sha256": "468689ead38fd5a56d22366357b94dedd844a8c2ed50b1b917f813915e83ec42"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.7"
+            "python_version": "3"
         },
         "sources": [
             {
@@ -50,18 +50,6 @@
             "index": "pypi",
             "version": "==2.8.4"
         },
-        "pydantic": {
-            "hashes": [
-                "sha256:1b567378e80d08b0b431c6676483e2c05db730e6f0098ea24b5e6f04a9e42244",
-                "sha256:52fc77d29a16edc7964a44890552a9817f82263b4832195ee278b0604928b743",
-                "sha256:6c6b17093fa7ce058b552fa7d24e0d03aff9a2f04cb7e0e0174e4a37dc9fd9b4",
-                "sha256:77e1ea62c6b8ace4a0fa7b3c22e3d99dfd3ef048a6a439ea4cb155230ae342af",
-                "sha256:9eb2749f0a8bfe7816d429985cd32b274182b91f835dd5a2eefc8a01944fdf42",
-                "sha256:d3452a5697d78744b2e2c485b0990b3a2ca8d69521203dd41a5d67338fb148a5"
-            ],
-            "index": "pypi",
-            "version": "==0.30.1"
-        },
         "pytz": {
             "hashes": [
                 "sha256:1c557d7d0e871de1f5ccd5833f60fb2550652da6be2693c1e02300743d21500d",
@@ -84,14 +72,6 @@
                 "sha256:d8b24664561d0d34ddfaec54636d502d7cea6e29c3eaf68f3df6180863e2166e"
             ],
             "version": "==1.4.3"
-        },
-        "asynctest": {
-            "hashes": [
-                "sha256:3cc304cfb59608d09fb302acbe086feafa010b0a9254b1b04c4c75f2265767fc",
-                "sha256:afd030357379ea52193c14ed73f97866a8076ba83e402f12dc0c717c7723a18d"
-            ],
-            "index": "pypi",
-            "version": "==0.12.1"
         },
         "atomicwrites": {
             "hashes": [
@@ -380,10 +360,6 @@
             ],
             "index": "pypi",
             "version": "==2.8.1"
-        },
-        "python-boilerplate": {
-            "editable": true,
-            "path": "."
         },
         "requests": {
             "hashes": [

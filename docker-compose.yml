@@ -1,0 +1,11 @@
+version: '3'
+services:
+  db:
+    image: postgres:11.5-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: 'db'
+      POSTGRES_DB: 'db_dev'
+      POSTGRES_PASSWORD: 'dev123'
+    ports:
+      - "5433:5432"
