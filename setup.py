@@ -10,11 +10,11 @@ setup(
     version="0.0.1",
     description="Django Mode Analytics Whitelabel",
     long_description=(open("README.md").read()),
-    long_description_content_type="text/x-md",
+    long_description_content_type="text/markdown",
     url="https://github.com/jesuejunior/django-modeanalytics",
     author="jesue Junior",
     author_email="jesuesousa@gmail.com",
-    license="MIT",
+    license="BSD-3",
     platforms=["OS Independent"],
     keywords="mode analytics data dashboard bi",
     classifiers=[
