@@ -26,6 +26,9 @@ class ModeReportModel(models.Model):
         verbose_name = "Report"
         ordering = ("pk",)
 
+    def __str__(self):
+        return self.name
+
     def __create_url(self, timestamp: int) -> str:
         org: str = settings.MODE_ORG
         access_key: str = settings.MODE_ACCESS_KEY
