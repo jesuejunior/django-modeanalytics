@@ -64,11 +64,26 @@ class TestGenerateReportUrl(TestCase):
         model.run_token = "12eaf1245c7e"
         model.params.update({"display[]": "right_side"})
         params: Dict[str, str] = {"email": "jj@admin", "display[]": "left_side"}
+
         model._ModeReportModel__convert_params(params)
 
         expected: Dict[str, str] = {"max_age": 1800, "param_email": "jj@admin", "param_display[]": "left_side"}
-        self.assertNotEqual(expected, model.params)
+        self.assertEqual(expected, model.params)
 
+    def test_params_saved_override(self):
+        model = ModeReportModel()
+        model.id = 1
+        model.name = "testy"
+        model.run_token = "12eaf1245c7e"
+        model.params.update({"email": ""})
+        model.save()
+        params: Dict[str, str] = {"email": "x@x.com", "phone": ""}
+        
+        report = ModeReportModel.objects.get(pk=1)
+        report._ModeReportModel__convert_params(params)
+        expected: Dict[str, str] = {"max_age": 1800, "param_email": "x@x.com", "param_phone": ""}
+        self.assertEqual(expected, report.params)
+    
     def test_mixed_params(self):
         """
         Test when there are params from web and from db with same names

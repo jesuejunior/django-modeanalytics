@@ -60,8 +60,8 @@ class ModeReportModel(models.Model):
 
     def __convert_params(self, params: Dict[str, str]) -> None:
         base_params: Dict[str, str] = {"max_age": self.params.get("max_age")}
-        params.update(self.params)
-        data: Dict[str, str] = {f"param_{k}": v for k, v in params.items() if k not in ["max_age", "timestamp"]}
+        self.params.update(params)
+        data: Dict[str, str] = {f"param_{k}": v for k, v in self.params.items() if k not in ["max_age", "timestamp"]}
         data.update(base_params)
         self.params = data
 
