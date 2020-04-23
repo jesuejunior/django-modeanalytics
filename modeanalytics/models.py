@@ -18,7 +18,7 @@ def f():
 class ModeReportModel(models.Model):
     name = models.CharField(max_length=120, verbose_name="Report Name")
     run_token = models.CharField(max_length=16, verbose_name="Run Token")
-    space = models.CharField(max_length=16, blank=True, null=True, verbose_name="Space")
+    # space = models.CharField(max_length=16, blank=True, null=True, verbose_name="Space")
     params = JSONField(
         default=f,
         verbose_name="Query Parameters(JSON)",
