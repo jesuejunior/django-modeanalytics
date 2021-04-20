@@ -14,7 +14,7 @@ codecov = "==2.0.15"
 mypy = "==0.630"
 black = "==18.9b0"
 isort = {extras = ["pipfile"],version = "==4.3.15"}
-lxml = "==4.6.2"
+lxml = "==4.6.3"
 twine = "*"
 bumpversion = "*"
 pytest-django = "*"
