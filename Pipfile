@@ -10,7 +10,7 @@ psycopg2 = "==2.8.4"
 [dev-packages]
 pytest = "==5.2.1"
 pytest-cov = "==2.8.1"
-codecov = "==2.0.15"
+codecov = "==2.0.16"
 mypy = "==0.630"
 black = "==18.9b0"
 isort = {extras = ["pipfile"],version = "==4.3.15"}
